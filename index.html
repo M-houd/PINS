@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffre — Portefeuille de documents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== ÉCRAN AUTH ===================== -->
+  <section id="auth-screen" class="screen screen--auth">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="brand__mark">C</span>
+        <span class="brand__name">Coffre</span>
+      </div>
+      <p class="auth-tagline">Vos documents officiels, toujours sur vous.</p>
+
+      <div class="tabs">
+        <button class="tab tab--active" data-tab="login">Connexion</button>
+        <button class="tab" data-tab="register">Créer un compte</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <label>Identifiant
+          <input type="text" name="identifier" placeholder="nom d'utilisateur ou email" required>
+        </label>
+        <label>Mot de passe
+          <input type="password" name="password" placeholder="••••••••" required>
+        </label>
+        <p class="form-error" data-error-for="login"></p>
+        <button type="submit" class="btn btn--primary">Se connecter</button>
+      </form>
+
+      <form id="register-form" class="auth-form" hidden>
+        <label>Nom complet
+          <input type="text" name="full_name" placeholder="Prénom Nom">
+        </label>
+        <label>Nom d'utilisateur
+          <input type="text" name="username" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Mot de passe
+          <input type="password" name="password" minlength="6" required>
+        </label>
+        <p class="form-error" data-error-for="register"></p>
+        <button type="submit" class="btn btn--primary">Créer mon compte</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== ÉCRAN WALLET ===================== -->
+  <section id="wallet-screen" class="screen screen--wallet" hidden>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand__mark">C</span>
+        <span class="brand__name">Coffre</span>
+      </div>
+      <div class="topbar__user">
+        <span id="user-display-name"></span>
+        <button id="logout-btn" class="btn btn--ghost">Déconnexion</button>
+      </div>
+    </header>
+
+    <main class="wallet">
+      <h1 class="wallet__title">Mes documents</h1>
+      <p class="wallet__subtitle">Scannez et conservez vos documents officiels en sécurité.</p>
+
+      <div class="card-grid" id="card-grid">
+        <!-- Les cartes de documents sont générées en JS -->
+      </div>
+    </main>
+  </section>
+
+  <!-- ===================== MODALE VISUALISATION ===================== -->
+  <div id="viewer-modal" class="modal" hidden>
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__content">
+      <button class="modal__close" data-close-modal aria-label="Fermer">&times;</button>
+      <div class="modal__doc-frame" id="modal-doc-frame"></div>
+      <div class="modal__meta" id="modal-doc-meta"></div>
+      <div class="modal__actions">
+        <label class="btn btn--primary btn--upload">
+          Rescanner
+          <input type="file" id="rescan-input" accept="image/*,application/pdf" hidden>
+        </label>
+        <button id="delete-doc-btn" class="btn btn--danger">Supprimer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODALE SCAN (upload initial) ===================== -->
+  <div id="scan-modal" class="modal" hidden>
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__content modal__content--scan">
+      <button class="modal__close" data-close-modal aria-label="Fermer">&times;</button>
+      <h2 id="scan-modal-title">Scanner un document</h2>
+      <p class="scan-hint">Prenez une photo nette et bien éclairée, ou importez un fichier existant.</p>
+
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="scan-input" accept="image/*,application/pdf" hidden>
+        <svg class="dropzone__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="10" width="40" height="30" rx="3" stroke="currentColor" stroke-width="2"/>
+          <circle cx="24" cy="25" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="M17 10L20 5H28L31 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="dropzone__label">Cliquez pour choisir un fichier</span>
+        <span class="dropzone__sub">JPG, PNG ou PDF — 10 Mo max</span>
+      </label>
+
+      <div class="scan-preview" id="scan-preview" hidden>
+        <img id="scan-preview-img" alt="Aperçu">
+      </div>
+
+      <div class="field-row">
+        <label>Numéro du document (optionnel)
+          <input type="text" id="scan-document-number">
+        </label>
+      </div>
+      <div class="field-row field-row--split">
+        <label>Date de délivrance
+          <input type="date" id="scan-issue-date">
+        </label>
+        <label>Date d'expiration
+          <input type="date" id="scan-expiry-date">
+        </label>
+      </div>
+
+      <p class="form-error" data-error-for="scan"></p>
+      <button id="scan-submit-btn" class="btn btn--primary btn--full">Enregistrer le document</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

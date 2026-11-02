@@ -1,0 +1,430 @@
+/* ============================================================
+   COFFRE — Portefeuille virtuel de documents
+   Palette : bleu nuit officiel + or (feuille d'or des sceaux
+   et passeports), vert document pour les accents secondaires.
+   ============================================================ */
+
+:root {
+  --bg-deep:      #0A0F1C;
+  --bg-panel:     #121A2B;
+  --bg-card:      #17233A;
+  --line:         #263352;
+  --gold:         #C9A44C;
+  --gold-soft:    #E7CE8C;
+  --green:        #1F6F54;
+  --text:         #EDF0F5;
+  --text-muted:   #8C96AC;
+  --danger:       #C0554A;
+
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius-card: 14px;
+  --radius-input: 8px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(201,164,76,0.06), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgba(31,111,84,0.08), transparent 45%);
+}
+
+h1, h2, .brand__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+button { font-family: inherit; cursor: pointer; }
+a { color: var(--gold-soft); }
+
+/* ---------------- Brand ---------------- */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand__mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(155deg, var(--gold), #a3803a);
+  color: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.brand__name {
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------------- Screens ---------------- */
+.screen { min-height: 100vh; }
+
+.screen--auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 2.2rem;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+}
+
+.auth-tagline {
+  color: var(--text-muted);
+  margin: 0.4rem 0 1.6rem;
+  font-size: 0.92rem;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.4rem;
+}
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.7rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab--active {
+  color: var(--gold-soft);
+  border-color: var(--gold);
+}
+
+.auth-form { display: flex; flex-direction: column; gap: 0.9rem; }
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="date"] {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-input);
+  padding: 0.65rem 0.8rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-family: inherit;
+}
+input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: var(--gold);
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 0.82rem;
+  min-height: 1.1em;
+  margin: 0;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius-input);
+  padding: 0.7rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 0.1s, opacity 0.15s;
+}
+.btn:active { transform: scale(0.98); }
+.btn--primary {
+  background: linear-gradient(155deg, var(--gold-soft), var(--gold));
+  color: #221904;
+}
+.btn--primary:hover { opacity: 0.92; }
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+}
+.btn--ghost:hover { color: var(--text); border-color: var(--gold); }
+.btn--danger {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+.btn--full { width: 100%; margin-top: 0.4rem; }
+
+/* ---------------- Topbar ---------------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-panel);
+}
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* ---------------- Wallet main ---------------- */
+.wallet {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.4rem 2rem 4rem;
+}
+.wallet__title {
+  font-size: 1.8rem;
+  margin: 0 0 0.3rem;
+}
+.wallet__subtitle {
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  font-size: 0.94rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.4rem;
+}
+
+/* ---------------- Document card (mimics a physical ID card) --- */
+.doc-card {
+  position: relative;
+  aspect-ratio: 1.586 / 1; /* format carte ID / carte bancaire */
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.doc-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.doc-card--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  background:
+    repeating-linear-gradient(135deg, transparent 0 10px, rgba(255,255,255,0.02) 10px 20px),
+    var(--bg-card);
+}
+.doc-card--empty svg { width: 32px; height: 32px; opacity: 0.7; }
+.doc-card--empty .doc-card__label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text);
+}
+.doc-card--empty .doc-card__hint { font-size: 0.78rem; }
+
+.doc-card--filled {
+  background-size: cover;
+  background-position: center;
+}
+.doc-card--filled::before {
+  /* léger motif de sécurité, façon guilloche, sur les cartes remplies */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    115deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 6px
+  );
+  pointer-events: none;
+}
+.doc-card__overlay {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0.7rem 0.9rem;
+  background: linear-gradient(0deg, rgba(10,15,28,0.92), rgba(10,15,28,0));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.doc-card__overlay-label {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+.doc-card__overlay-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold-soft);
+}
+.doc-card__seal {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--gold-soft);
+  background: rgba(10,15,28,0.5);
+}
+
+/* ---------------- Modal ---------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6,9,17,0.78);
+  backdrop-filter: blur(3px);
+}
+.modal__content {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  padding: 1.8rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal__close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.modal__close:hover { color: var(--text); }
+
+.modal__doc-frame {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  margin-bottom: 1rem;
+  background: var(--bg-card);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__doc-frame img {
+  width: 100%;
+  display: block;
+}
+.modal__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+}
+.modal__meta strong { color: var(--text); font-weight: 500; }
+.modal__actions {
+  display: flex;
+  gap: 0.7rem;
+}
+.modal__actions .btn { flex: 1; text-align: center; }
+.btn--upload { display: flex; align-items: center; justify-content: center; }
+
+/* ---------------- Scan modal ---------------- */
+.scan-hint {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.2rem 0 1.2rem;
+}
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.dropzone:hover { border-color: var(--gold); color: var(--gold-soft); }
+.dropzone__label { font-size: 0.9rem; color: var(--text); }
+.dropzone__sub { font-size: 0.75rem; }
+
+.scan-preview {
+  margin-top: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.scan-preview img { width: 100%; display: block; }
+
+.field-row { margin-top: 1rem; }
+.field-row--split { display: flex; gap: 0.8rem; }
+.field-row--split label { flex: 1; }
+.field-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 560px) {
+  .wallet { padding: 1.6rem 1.2rem 3rem; }
+  .topbar { padding: 1rem 1.2rem; }
+  .field-row--split { flex-direction: column; gap: 1rem; }
+}
+
+/* Accessibilité : focus visible partout */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
